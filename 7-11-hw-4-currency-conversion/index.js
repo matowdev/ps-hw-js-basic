@@ -40,35 +40,29 @@ function getConversion(currencyAmount, inCurrency, outCurrency) {
   }
 
   if (inCurr === 'rub' && outCurr === 'usd') {
-    return `Сумма конвертации Рублей в Доллары составила: ${(convertSum =
-      currencyAmount / CONVERSION_RU_USD).toFixed(2)} долларов`;
+    return (convertSum = currencyAmount / CONVERSION_RU_USD).toFixed(2);
   } else if (inCurr === 'usd' && outCurr === 'rub') {
-    return `Сумма конвертации Долларов в Рубли составила: ${(convertSum =
-      currencyAmount * CONVERSION_RU_USD).toFixed(2)} рублей`;
+    return (convertSum = currencyAmount * CONVERSION_RU_USD).toFixed(2);
   }
 
   if (inCurr === 'rub' && outCurr === 'eur') {
-    return `Сумма конвертации Рублей в Евро составила: ${(convertSum =
-      currencyAmount / CONVERSION_RU_EUR).toFixed(2)} евро`;
+    return (convertSum = currencyAmount / CONVERSION_RU_EUR).toFixed(2);
   } else if (inCurr === 'eur' && outCurr === 'rub') {
-    return `Сумма конвертации Евро в Рубли составила: ${(convertSum =
-      currencyAmount * CONVERSION_RU_EUR).toFixed(2)} рублей`;
+    return (convertSum = currencyAmount * CONVERSION_RU_EUR).toFixed(2);
   }
 
   if (inCurr === 'usd' && outCurr === 'eur') {
-    return `Сумма конвертации Долларов в Евро составила: ${(convertSum =
-      currencyAmount * CONVERSION_USD_EUR).toFixed(2)} евро`;
+    return (convertSum = currencyAmount * CONVERSION_USD_EUR).toFixed(2);
   } else if (inCurr === 'eur' && outCurr === 'usd') {
-    return `Сумма конвертации Евро в Доллары составила: ${(convertSum =
-      currencyAmount / CONVERSION_USD_EUR).toFixed(2)} долларов`;
+    return (convertSum = currencyAmount / CONVERSION_USD_EUR).toFixed(2);
   }
 }
 
-console.log(getConversion(1000, 'RUB', 'USD')); // Сумма конвертации Рублей в Доллары составила: 12.57 долларов
-console.log(getConversion(100, 'USD', 'RUB')); // Сумма конвертации Долларов в Рубли составила: 7955.00 рублей
-console.log(getConversion(5000, 'RUB', 'EUR')); // Сумма конвертации Рублей в Евро составила: 53.56 евро
-console.log(getConversion(500, 'EUR', 'RUB')); // Сумма конвертации Евро в Рубли составила: 46675.00 рублей
-console.log(getConversion(50, 'USD', 'EUR')); // Сумма конвертации Долларов в Евро составила: 46.00 евро
+console.log(getConversion(1000, 'RUB', 'USD')); // 12.57
+console.log(getConversion(100, 'USD', 'RUB')); // 7955.00
+console.log(getConversion(5000, 'RUB', 'EUR')); // 53.56
+console.log(getConversion(500, 'EUR', 'RUB')); // 46675.00
+console.log(getConversion(50, 'USD', 'EUR')); // 46.00
 console.log(getConversion()); // Предоставлены не все данные! Конвертация не возможна!
 console.log(getConversion(10, 'rub', 'RUB')); // Указана одинаковая пара валют rub/rub. Конвертация не возможна!
 console.log(getConversion(10, 'RUB', 'BLR')); // null

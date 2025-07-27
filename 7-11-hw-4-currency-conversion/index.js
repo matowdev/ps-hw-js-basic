@@ -40,21 +40,25 @@ function getConversion(currencyAmount, inCurrency, outCurrency) {
   }
 
   if (inCurr === 'rub' && outCurr === 'usd') {
-    return (convertSum = currencyAmount / CONVERSION_RU_USD).toFixed(2);
+    return Number((convertSum = currencyAmount / CONVERSION_RU_USD).toFixed(2));
   } else if (inCurr === 'usd' && outCurr === 'rub') {
-    return (convertSum = currencyAmount * CONVERSION_RU_USD).toFixed(2);
+    return Number((convertSum = currencyAmount * CONVERSION_RU_USD).toFixed(2));
   }
 
   if (inCurr === 'rub' && outCurr === 'eur') {
-    return (convertSum = currencyAmount / CONVERSION_RU_EUR).toFixed(2);
+    return Number((convertSum = currencyAmount / CONVERSION_RU_EUR).toFixed(2));
   } else if (inCurr === 'eur' && outCurr === 'rub') {
-    return (convertSum = currencyAmount * CONVERSION_RU_EUR).toFixed(2);
+    return Number((convertSum = currencyAmount * CONVERSION_RU_EUR).toFixed(2));
   }
 
   if (inCurr === 'usd' && outCurr === 'eur') {
-    return (convertSum = currencyAmount * CONVERSION_USD_EUR).toFixed(2);
+    return Number(
+      (convertSum = currencyAmount * CONVERSION_USD_EUR).toFixed(2)
+    );
   } else if (inCurr === 'eur' && outCurr === 'usd') {
-    return (convertSum = currencyAmount / CONVERSION_USD_EUR).toFixed(2);
+    return Number(
+      (convertSum = currencyAmount / CONVERSION_USD_EUR).toFixed(2)
+    );
   }
 }
 

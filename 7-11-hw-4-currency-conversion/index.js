@@ -9,16 +9,16 @@ const CONVERSION_USD_EUR = 0.92;
 
 function getConversion(currencyAmount, inCurrency, outCurrency) {
   if (!currencyAmount || !inCurrency || !outCurrency) {
-    return `Предоставлены не все данные! Конвертация не возможна!`;
+    return null;
   }
 
   if (typeof currencyAmount !== 'number') {
-    return `Неверный формат суммы! Ожидается числовое значение!`;
+    return null;
   } else if (
     typeof inCurrency !== 'string' ||
     typeof outCurrency !== 'string'
   ) {
-    return `Неверный формат валюты! Ожидаются строковые значения, типа: 'rub', 'usd'.`;
+    return null;
   }
 
   const inCurr = inCurrency.toLowerCase();
@@ -31,12 +31,8 @@ function getConversion(currencyAmount, inCurrency, outCurrency) {
     return null;
   }
 
-  if (inCurr === 'rub' && outCurr === 'rub') {
-    return `Указана одинаковая пара валют ${inCurr}/${outCurr}. Конвертация не возможна!`;
-  } else if (inCurr === 'usd' && outCurr === 'usd') {
-    return `Указана одинаковая пара валют ${inCurr}/${outCurr}. Конвертация не возможна!`;
-  } else if (inCurr === 'eur' && outCurr === 'eur') {
-    return `Указана одинаковая пара валют ${inCurr}/${outCurr}. Конвертация не возможна!`;
+  if (inCurr === outCurr) {
+    return null;
   }
 
   if (inCurr === 'rub' && outCurr === 'usd') {
@@ -63,12 +59,12 @@ function getConversion(currencyAmount, inCurrency, outCurrency) {
 }
 
 console.log(getConversion(1000, 'RUB', 'USD')); // 12.57
-console.log(getConversion(100, 'USD', 'RUB')); // 7955.00
+console.log(getConversion(100, 'USD', 'RUB')); // 7955
 console.log(getConversion(5000, 'RUB', 'EUR')); // 53.56
-console.log(getConversion(500, 'EUR', 'RUB')); // 46675.00
-console.log(getConversion(50, 'USD', 'EUR')); // 46.00
-console.log(getConversion()); // Предоставлены не все данные! Конвертация не возможна!
-console.log(getConversion(10, 'rub', 'RUB')); // Указана одинаковая пара валют rub/rub. Конвертация не возможна!
+console.log(getConversion(500, 'EUR', 'RUB')); // 46675
+console.log(getConversion(50, 'USD', 'EUR')); // 46
+console.log(getConversion()); // null
+console.log(getConversion(10, 'rub', 'RUB')); // null
 console.log(getConversion(10, 'RUB', 'BLR')); // null
-console.log(getConversion('10', 'eur', 'usd')); // Неверный формат суммы! Ожидается числовое значение!
-console.log(getConversion(10, '123', 10)); // Неверный формат валюты! Ожидаются строковые значения, типа: 'rub', 'usd'.
+console.log(getConversion('10', 'eur', 'usd')); // null
+console.log(getConversion(10, '123', 10)); // null

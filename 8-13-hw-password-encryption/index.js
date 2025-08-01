@@ -7,7 +7,7 @@
 // check(‘ssapdorw’, ‘wrong’) -> false
 
 const defaultPass = 'password';
-const defaultPas2 = 'wrong';
+const defaultPass2 = 'wrong';
 
 function getEncryption(password) {
   if (!password || password == ' ') {
@@ -15,10 +15,12 @@ function getEncryption(password) {
     return false;
   }
 
-  const reversePass = password.split('').reverse().join('');
-  const randomNum = Math.floor(Math.random() * (1000 - 10 + 1) + 10);
+  const middleIndex = Math.ceil(password.length / 2);
+  const firsPart = password.slice(0, middleIndex).split('').reverse().join('');
+  const secondPart = password.slice(middleIndex).split('').reverse().join('');
+  const encryptPass = firsPart + secondPart;
 
-  return reversePass + randomNum;
+  return encryptPass;
 }
 
 function passwordComparison(encryptPass, defaultPass) {
@@ -27,13 +29,24 @@ function passwordComparison(encryptPass, defaultPass) {
     return false;
   }
 
-  const reverseTurn = encryptPass.split('').reverse().join('');
+  const middleIndex = Math.ceil(encryptPass.length / 2);
+  const firsPart = encryptPass
+    .slice(0, middleIndex)
+    .split('')
+    .reverse()
+    .join('');
+  const secondPart = encryptPass
+    .slice(middleIndex)
+    .split('')
+    .reverse()
+    .join('');
+  const deEncryptPass = firsPart + secondPart;
 
-  return reverseTurn.includes(defaultPass);
+  return deEncryptPass === defaultPass;
 }
 
 const encryptPass = getEncryption(defaultPass);
-console.log(encryptPass); // drowssap88
+console.log(encryptPass); // ssapdrow
 
 console.log(passwordComparison(encryptPass, defaultPass)); // true
-console.log(passwordComparison(encryptPass, defaultPas2)); // false
+console.log(passwordComparison(encryptPass, defaultPass2)); // false

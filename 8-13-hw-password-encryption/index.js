@@ -6,47 +6,53 @@
 // check(‘ssapdorw’, ‘password’) -> true
 // check(‘ssapdorw’, ‘wrong’) -> false
 
-const defaultPass = 'password';
-const defaultPass2 = 'wrong';
-
-function getEncryption(password) {
-  if (!password || password == ' ') {
-    // return `Не корректный пароль!`;
+function crypto(password) {
+  if (!password || password.trim() === '') {
     return false;
   }
 
-  const middleIndex = Math.ceil(password.length / 2);
-  const firsPart = password.slice(0, middleIndex).split('').reverse().join('');
-  const secondPart = password.slice(middleIndex).split('').reverse().join('');
-  const encryptPass = firsPart + secondPart;
+  const middleIndex = Math.floor(password.length / 2);
+  const firstPart = password.slice(0, middleIndex);
+  const secondPart = password.slice(middleIndex);
 
-  return encryptPass;
-}
+  // 1. Переворачиваем первую часть
+  const encryptedFirstPart = firstPart.split('').reverse().join('');
 
-function passwordComparison(encryptPass, defaultPass) {
-  if (!encryptPass || !defaultPass || defaultPass == ' ') {
-    // return `Не все данные! Сравнение не возможно!`;
-    return false;
+  // 2. Во второй части меняем местами первый и последний символы
+  let encryptedSecondPart;
+  if (secondPart.length > 1) {
+    const firstLetter = secondPart[0];
+    const lastLetter = secondPart[secondPart.length - 1];
+    const middlePart = secondPart.slice(1, -1);
+    encryptedSecondPart = lastLetter + middlePart + firstLetter;
+  } else {
+    // Если вторая часть состоит из одного символа или пуста, оставляем как есть
+    encryptedSecondPart = secondPart;
   }
 
-  const middleIndex = Math.ceil(encryptPass.length / 2);
-  const firsPart = encryptPass
-    .slice(0, middleIndex)
-    .split('')
-    .reverse()
-    .join('');
-  const secondPart = encryptPass
-    .slice(middleIndex)
-    .split('')
-    .reverse()
-    .join('');
-  const deEncryptPass = firsPart + secondPart;
-
-  return deEncryptPass === defaultPass;
+  return encryptedFirstPart + encryptedSecondPart;
 }
 
-const encryptPass = getEncryption(defaultPass);
-console.log(encryptPass); // ssapdrow
+function check(encryptedPassword, originalPassword) {
+  // Самый надежный способ проверки - зашифровать оригинальный пароль и сравнить результат с уже зашифрованным.
+  if (!originalPassword || !encryptedPassword) {
+    return false;
+  }
+  return crypto(originalPassword) === encryptedPassword;
+}
 
-console.log(passwordComparison(encryptPass, defaultPass)); // true
-console.log(passwordComparison(encryptPass, defaultPass2)); // false
+// ?? Тестирование
+const passwordToEncrypt = 'password';
+const wrongPassword = 'wrong';
+
+// Шифруем пароль 'password'
+const encrypted = crypto(passwordToEncrypt);
+console.log(`crypto(‘password’) -> ${encrypted}`);
+
+// Проверяем правильный пароль
+const isCorrect = check(encrypted, passwordToEncrypt);
+console.log(`check(‘${encrypted}’, ‘password’) -> ${isCorrect}`);
+
+// Проверяем неправильный пароль
+const isWrong = check(encrypted, wrongPassword);
+console.log(`check(‘${encrypted}’, ‘wrong’) -> ${isWrong}`);

@@ -6,6 +6,9 @@
 // check(‘ssapdorw’, ‘password’) -> true
 // check(‘ssapdorw’, ‘wrong’) -> false
 
+const passwordToEncrypt = 'password';
+const wrongPassword = 'wrong';
+
 function crypto(password) {
   if (!password || password.trim() === '') {
     return false;
@@ -41,18 +44,14 @@ function check(encryptedPassword, originalPassword) {
   return crypto(originalPassword) === encryptedPassword;
 }
 
-// ?? Тестирование
-const passwordToEncrypt = 'password';
-const wrongPassword = 'wrong';
-
 // Шифруем пароль 'password'
 const encrypted = crypto(passwordToEncrypt);
-console.log(`crypto(‘password’) -> ${encrypted}`);
+console.log(encrypted); // ssapdorw
 
 // Проверяем правильный пароль
 const isCorrect = check(encrypted, passwordToEncrypt);
-console.log(`check(‘${encrypted}’, ‘password’) -> ${isCorrect}`);
+console.log(isCorrect); // true
 
 // Проверяем неправильный пароль
 const isWrong = check(encrypted, wrongPassword);
-console.log(`check(‘${encrypted}’, ‘wrong’) -> ${isWrong}`);
+console.log(isWrong); // false

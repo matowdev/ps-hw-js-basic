@@ -35,10 +35,11 @@ function getTransformData(dataArr = []) {
   }
 
   if (usaData.length !== 0) {
-    usaData.map((data) => {
-      const [month, day, year] = data.split('/');
-      transformData.push([day, month, year]);
-    });
+    // usaData.map((data) => {
+    //   const [month, day, year] = data.split('/');
+    //   transformData.push([day, month, year]);
+    // });
+    usaData.map((data) => transformData.push(data.split('/')));
   }
 
   return transformData

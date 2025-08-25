@@ -19,16 +19,16 @@ function checkLuhn(cardNum) {
     }
   }
 
-  cardNum = cardNum.split('').map(Number); // обязательное преобразование элементов к типу Number (а то в reduce() потом получиться одна большая строка, а не сумма)
+  cardNum = cardNum.split('').map(Number).reverse(); // обязательное преобразование элементов к типу Number (а то в reduce() потом получиться одна большая строка, а не сумма)
 
   const totalSum = cardNum.reduce((acc, num, index) => {
-    if (index % 2 === 0) {
+    if (index % 2 !== 0) {
       if (num * 2 > 9) {
         return acc + (num * 2 - 9);
       } else if (num * 2 <= 9) {
         return acc + num * 2;
       }
-    } else if (index % 2 !== 0) {
+    } else if (index % 2 === 0) {
       return acc + num;
     }
   }, 0);
@@ -62,6 +62,7 @@ console.log(hasCheckPass); // false
 //         digit -= 9;
 //       }
 //     }
+
 //     return acc + digit;
 //   }, 0);
 //
